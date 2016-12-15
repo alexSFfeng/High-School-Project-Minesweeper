@@ -130,17 +130,17 @@ public class MSButton
     
     public void mousePressed () 
     {
-        if(mouseButton == RIGHT && !buttons[r][c].isClicked())
-        {
-         
-         marked = !marked;
-
-        }
         if(mouseButton == LEFT && !buttons[r][c].isMarked())
         {
-            clicked = true;
+         
+         clicked = true;
+
         }
-        if (buttons[r][c].isClicked() && bombs.contains(this))
+        if(mouseButton == RIGHT && !buttons[r][c].isClicked())
+        {
+            marked = !marked;
+        }
+        else if (!buttons[r][c].isMarked() && bombs.contains(this))
         {
           displayLosingMessage();
           for(int r = 0; r < NUM_ROWS; r ++)
@@ -157,7 +157,9 @@ public class MSButton
         }
         else if(countBombs(r,c) > 0)
         {
-            setLabel(""+countBombs(r,c));
+            if(!(bombs.contains(buttons[r][c]))) {
+              setLabel(""+countBombs(r,c));
+            }
         }
         else 
         {
