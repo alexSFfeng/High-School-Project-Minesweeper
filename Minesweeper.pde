@@ -45,6 +45,16 @@ public void draw ()
     background( 0 );
     if(isWon())
         displayWinningMessage();
+    for(int r = 0; r < NUM_ROWS; r ++)
+    {
+        for(int c = 0; c < NUM_COLS; c ++)
+        {
+            if(bombs.contains(buttons[r][c]) && buttons[r][c].isClicked() == true )
+            {
+                displayLosingMessage();
+            }
+        }
+    }
 }
 public boolean isWon()
 {
