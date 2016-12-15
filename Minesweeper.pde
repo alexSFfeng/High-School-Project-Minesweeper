@@ -3,6 +3,7 @@
 import de.bezier.guido.*;
 private int NUM_ROWS = 20;
 private int NUM_COLS = 20;
+private boolean gameOver = false;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton>(); //ArrayList of just the minesweeper buttons that are mined
 
@@ -45,6 +46,9 @@ public void draw ()
     background( 0 );
     if(isWon())
         displayWinningMessage();
+    if(gameOver) {
+        noLoop();
+    }
 }
 public boolean isWon()
 {
@@ -78,10 +82,10 @@ public void displayLosingMessage()
              buttons[10][11].setLabel("O");
              buttons[10][12].setLabel("S");
              buttons[10][13].setLabel("E");
-             
             }
         }
     }
+    gameOver = true;
 }
 public void displayWinningMessage()
 {
@@ -149,7 +153,7 @@ public class MSButton
               }
             }
           }
-          noLoop();
+          
         }
         else if(countBombs(r,c) > 0)
         {
