@@ -45,16 +45,6 @@ public void draw ()
     background( 0 );
     if(isWon())
         displayWinningMessage();
-    for(int r = 0; r < NUM_ROWS; r ++)
-    {
-        for(int c = 0; c < NUM_COLS; c ++)
-        {
-            if(bombs.contains(buttons[r][c]) && buttons[r][c].isClicked() == true )
-            {
-                displayLosingMessage();
-            }
-        }
-    }
 }
 public boolean isWon()
 {
@@ -88,7 +78,7 @@ public void displayLosingMessage()
              buttons[10][11].setLabel("O");
              buttons[10][12].setLabel("S");
              buttons[10][13].setLabel("E");
-             noLoop();
+             
             }
         }
     }
@@ -136,7 +126,7 @@ public class MSButton
     
     public void mousePressed () 
     {
-        if(mouseButton == LEFT)
+        if(mouseButton == LEFT && buttons[r][c].isMarked() == false)
         {
 
         clicked = true;
@@ -159,6 +149,7 @@ public class MSButton
             }
                }
            }
+           noLoop();
         }
         else if(countBombs(r,c) > 0)
         {
@@ -184,7 +175,7 @@ public class MSButton
     {    
         if (marked)
             fill(0);
-         else if( clicked && bombs.contains(this) ) 
+        else if( clicked && bombs.contains(this) ) 
              fill(255,0,0);
         else if(clicked)
             fill( 200 );
